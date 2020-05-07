@@ -18,7 +18,7 @@ class Post < ApplicationRecord
   scope :filter_status_and_user, ->(user) { where(status: 'draft', user: user) }
 
   def custom_validation
-    if self.status == 'draft' && filter_status_and_user(self.user).count >= 1
+    if self.status == 'draft' && Post.filter_status_and_user(self.user).count >= 1
       errors.add(:base, "Only 1 post can be in draft status.")
     end
   end
