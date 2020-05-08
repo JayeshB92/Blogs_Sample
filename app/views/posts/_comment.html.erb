@@ -1,0 +1,23 @@
+<!-- Comment with nested comments -->
+<% comments.each do |comment| %>
+  <div class="media mb-4">
+    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+    <div class="media-body">
+      <div class="row">
+        <div class="col-lg-12">
+          <span class="mt-0 float-right">
+          <%= link_to_if owner?(comment), 'Delete', comment, {method: :delete, class: 'btn btn-outline-danger', data: {confirm: 'Are you sure?'}} %>
+          </span>
+          <h5 class="mt-0"><%= comment.user.name.capitalize %></h5>
+        </div>
+      </div>
+
+      <h6><i><%= comment.created_at.strftime("%B %e,%Y at %I:%M %p") %></i></h6>
+      <%= comment.description %>
+
+
+      <%= render partial: 'posts/comment', locals: {comments: comment.comments.reverse} %>
+
+    </div>
+  </div>
+<% end %>

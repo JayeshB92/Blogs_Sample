@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="row">
+      <div class="col-lg-12">
+        <span class="mt-4 float-right">
+          <% if owner? @post %>
+            <%= link_to 'Edit', edit_post_path(@post), {class: 'btn btn-outline-info'} %>
+          <% end %>
+          <%= link_to 'Back', posts_path, {class: 'btn btn-secondary'} %>
+        </span>
+        <h1 class="mt-4"><%= @post.title %></h1>
+      </div>
+    </div>
+    <p class="lead">by <a href="#"><%= @post.user.name.capitalize %></a></p>
+    <hr/>
+    <p>Posted on <%= @post.created_at.strftime("%B %e,%Y at %I:%M %p") %></p>
+    <hr/>
+    <p><%= @post.body %></p>
+    <hr/>
+
+    <%= render partial: 'comments/form', locals: {comment: @comment} %>
+
+    <%= render partial: 'posts/comment', locals: {comments: @post.comments.reverse.select { |x| x.persisted? }} %>
+
+  </div>
+</div>

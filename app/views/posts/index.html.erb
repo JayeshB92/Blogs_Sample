@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Posts</h1>
+
+<table class="table">
+  <thead>
+  <tr class="d-flex">
+    <th class="col-2">Title</th>
+    <th class="col-5">Body</th>
+    <th class="col-1">Status</th>
+    <th class="col-4" colspan="4">Actions</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% if @posts.exists? %>
+    <% @posts.each do |post| %>
+      <tr class="d-flex">
+        <td class="col-2"><%= link_to post.title, post %></td>
+        <td class="col-5"><%= post.body %></td>
+        <td class="col-1"><%= post.status.capitalize %></td>
+        <td class="col-1"><%= link_to 'Edit', edit_post_path(post) %></td>
+        <td class="col-1"><%= link_to_if owner?(post), 'Delete', post, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <td class="col-1"><%= link_to_if owner?(post), 'Publish', publish_post_path(post) %></td>
+        <td class="col-1"><%= link_to_if owner?(post), 'Archive', archive_post_path(post) %></td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="7"> No Records</td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<div>
+  <%= link_to 'New Post', new_post_path, {class: 'btn btn-success'} %>
+</div>

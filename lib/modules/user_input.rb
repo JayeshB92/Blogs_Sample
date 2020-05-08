@@ -1,19 +1,29 @@
 module UserInput
   extend ActiveSupport::Concern
 
-  def has_invalid_words(input)
-    invalid_words = %w(bad poor filthy dirty stupid)
-    invalid_words.any? { |invalid_word| input.include? invalid_word }
+  def has_words?(input = '', array_of_words = [])
+    array_of_words = %w(bad poor filthy dirty stupid) if array_of_words.blank?
+    words = array_of_words.select { |invalid_word|
+      if input.include? invalid_word then
+        invalid_word
+      end }
+    [words.present?, words]
   end
 
-  def contains_words(string = "", array_of_words = [])
-    array_of_words.any? { |word| string.include? word }
-  end
-  
-  module ClassMethods # Compulsory to use ClassMethods when using ActiveSupport::Concern
-    def count_vowels(string)
-      string.downcase.count('aeiou')
+  def update_word_count
+    if self.respond_to?(:word_count) && self.class.const_defined?(:WORD_COUNT_COLUMN)
+      self.word_count = self.class.count_words(self.send(self.class::WORD_COUNT_COLUMN))
     end
+  end
+
+  module ClassMethods # Compulsory to use ClassMethods when using ActiveSupport::Concern
+    def count_words(string)
+      string.split.count
+    end
+  end
+
+  included do
+    before_save :update_word_count
   end
 
   # Using different module name with 'extend ActiveSupport::Concern'

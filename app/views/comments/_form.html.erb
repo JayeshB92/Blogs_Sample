@@ -1,0 +1,13 @@
+<div class="card my-4">
+  <h5 class="card-header">Leave a Comment:</h5>
+  <div class="card-body">
+    <%= form_for(comment) do |f| %>
+      <%= f.hidden_field :commentable_type %>
+      <%= f.hidden_field :commentable_id %>
+      <div class="form-group">
+        <%= f.text_area :description, {rows: "3", class: "form-control"} %>
+      </div>
+      <%= f.submit nil, {class: 'btn btn-outline-success'} %>
+    <% end %>
+  </div>
+</div>

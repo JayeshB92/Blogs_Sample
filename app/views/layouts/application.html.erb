@@ -4,11 +4,25 @@
   <title>BlogApp</title>
   <%= csrf_meta_tags %>
 
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+  <%= favicon_link_tag asset_path('favicon.png') %>
 </head>
 
 <body>
-<%= yield %>
+<div id="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-static-top">
+    <%= link_to 'Blog App', root_path, {class: "navbar-brand"} %>
+    <% if user_signed_in? %>
+      <%= link_to 'Logout', destroy_user_session_path, {class: 'btn btn-outline-danger float-right ml-auto'} %>
+    <% else %>
+      <%= link_to 'Login', new_user_session_path, {class: 'btn btn-outline-success float-right ml-auto'} %>
+    <% end %>
+  </nav>
+
+  <div id="content" class="container-fluid">
+    <%= yield %>
+  </div>
+</div>
 </body>
 </html>

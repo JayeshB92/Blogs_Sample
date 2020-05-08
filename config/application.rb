@@ -24,5 +24,6 @@ module BlogApp
 
     # config.autoload_paths << Rails.root.join('lib')
     config.autoload_paths << Rails.root.join('lib/modules')
+    config.middleware.use 'RequestStatsLogger'
   end
 end
