@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   include UserInput
 
+  enum status: [:draft, :published, :archived]
+  
   belongs_to :user
   has_many :tags
   has_many :comments, as: :commentable, dependent: :destroy
