@@ -48,7 +48,7 @@ class PostsController < ApplicationController
 
   def publish
     notice = 'Post was already published.'
-    if @post.not_published
+    unless @post.published?
       @post.published!
       notice = 'Post was successfully published.'
     end
@@ -56,10 +56,10 @@ class PostsController < ApplicationController
   end
 
   def archive
-    notice = 'Post was already published.'
-    if @post.not_archived
+    notice = 'Post was already archived.'
+    unless @post.archived?
       @post.archived!
-      notice = 'Post was successfully published.'
+      notice = 'Post was successfully archived.'
     end
     redirect_to posts_path, notice: notice
   end
