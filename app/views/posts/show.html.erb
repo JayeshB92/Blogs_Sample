@@ -22,7 +22,7 @@
 
     <%= render partial: 'comments/form', locals: {comment: @comment} %>
 
-    <%= render partial: 'posts/comment', locals: {comments: @post.comments.reverse.select { |x| x.persisted? }} %>
+    <%= render partial: 'posts/comment', locals: {comments: @post.comments.reverse.select { |x| x.persisted? }} if @post.comments.any? %>
 
   </div>
 </div>
