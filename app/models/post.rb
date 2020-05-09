@@ -7,11 +7,9 @@ class Post < ApplicationRecord
   has_many :tags
   has_many :comments, as: :commentable, dependent: :destroy
 
-  before_save :update_word_count
-
   validates_length_of :title, :maximum => 50, allow_blank: false
   validates_length_of :body, :maximum => 200, allow_blank: false
-  validates_presence_of :status
+  validates :status, inclusion: {in: statuses.keys}
 
   validate :custom_validation, on: :create
 
@@ -34,9 +32,5 @@ class Post < ApplicationRecord
     if words_present
       errors.add(:body, "cannot have words containing: " + words.join(", "))
     end
-  end
-
-  def update_word_count
-    self.word_count = Post.count_words(self.body)
   end
 end
