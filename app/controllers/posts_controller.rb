@@ -51,7 +51,6 @@ class PostsController < ApplicationController
     unless @post.published?
       @post.published!
       notice = 'Post was successfully published.'
-      EmailWorker.perform_later(@post.user.id, notice)
     end
     redirect_to posts_path, notice: notice
   end
@@ -61,7 +60,6 @@ class PostsController < ApplicationController
     unless @post.archived?
       @post.archived!
       notice = 'Post was successfully archived.'
-      EmailWorker.perform_later(@post.user.id, notice)
     end
     redirect_to posts_path, notice: notice
   end

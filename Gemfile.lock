@@ -60,7 +60,6 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.6)
-    connection_pool (2.2.2)
     crass (1.0.6)
     devise (4.3.0)
       bcrypt (~> 3.0)
@@ -119,8 +118,6 @@ GEM
     rack-pjax (1.1.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
-    rack-protection (2.0.8.1)
-      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.7.2)
@@ -164,7 +161,6 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redis (4.1.4)
     remotipart (1.4.4)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
@@ -188,11 +184,6 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    sidekiq (5.2.7)
-      connection_pool (~> 2.2, >= 2.2.2)
-      rack (>= 1.5.0)
-      rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -240,7 +231,6 @@ DEPENDENCIES
   rails-ujs
   rails_admin
   sass-rails (~> 5.0)
-  sidekiq
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)
